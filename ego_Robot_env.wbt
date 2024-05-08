@@ -1,0 +1,780 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.7071057814660383 0.7071077809056435 5.551115123136879e-17 3.1415966524690035
+  position 0.20803549373168803 1.755163863207467 0.008841672601514751
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  rotation 1 0 0 -1.57
+}
+DEF inner_line Group {
+  children [
+    Solid {
+      translation -0.0525 0.05 -0.0525
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_-4"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.0525 0.05 -0.0525
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_4"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.0525 0.05 0.0525
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_-3"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.0525 0.05 0.0525
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_3"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0 0.05 -0.1
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_-2"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0 0.05 0.1
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_2"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.1 0.05 0
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_-1"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.1 0.05 0
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "y_cone_1"
+      boundingObject Shape {
+      }
+    }
+  ]
+}
+DEF outer_line Group {
+  children [
+    Solid {
+      translation 0.261 0.05 -0.146
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+    }
+    Solid {
+      translation 0.146 0.05 -0.261
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.146 0.05 -0.261
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.216 0.05 0.207
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+    }
+    Solid {
+      translation -0.216 0.05 -0.207
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.216 0.05 0.207
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.216 0.05 -0.207
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.261 0.05 -0.146
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.146 0.05 0.261
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.261 0.05 0.146
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.261 0.05 0.146
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.075 0.05 0.29
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.075 0.05 -0.29
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.075 0.05 -0.29
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.075 0.05 0.29
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.29 0.05 0.075
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.29 0.05 0.075
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.29 0.05 -0.075
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation -0.29 0.05 -0.075
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0.146 0.05 0.261
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0 0.05 -0.3
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(2)"
+      boundingObject Shape {
+      }
+    }
+    Solid {
+      translation 0 0.05 0.3
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(2)"
+    }
+    Solid {
+      translation -0.3 0.05 0
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+    }
+    Solid {
+      translation 0.3 0.05 0
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.035
+            height 0.1
+          }
+        }
+      ]
+      name "cone(3)"
+    }
+  ]
+}
+Robot {
+  translation 0.19990068726014815 -0.0002069087296338104 -2.3951746052542364e-05
+  rotation 0.9999942915995922 0.003378488108350197 -5.085599013930841e-05 0.02894613925595615
+  children [
+    DEF M2 HingeJoint {
+      jointParameters HingeJointParameters {
+        position 3.787841065252202e-09
+        anchor -0.045 0.025 0
+      }
+      device [
+        RotationalMotor {
+          name "motor_2"
+        }
+        PositionSensor {
+          name "ps_2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.045 0.025 0
+        rotation 1.5073809784582936e-09 1 1.5061810882839464e-09 1.5699999999999996
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 1 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.025
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE wheel
+        physics DEF wheel_physics Physics {
+        }
+      }
+    }
+    Solid {
+      translation 0 0.07 0.045
+      children [
+        RangeFinder {
+          rotation 0.3483665071458088 0.6967330142916176 0.6270597128624559 -1.5
+          recognitionColors [
+            0.99942 0.98555 0
+            0 0 1
+          ]
+          lens Lens {
+          }
+        }
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.025 0.01 0.01
+          }
+        }
+      ]
+      name "Dept_cam"
+    }
+    DEF Body Pose {
+      translation 0 0.0415 0
+      rotation 1 0 0 -1.57
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    DEF M1 HingeJoint {
+      jointParameters HingeJointParameters {
+        position -8.248037500178779e-08
+        anchor -0.045 0.025 0
+      }
+      device [
+        RotationalMotor {
+          name "motor_1"
+        }
+        PositionSensor {
+          name "ps_1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.045 0.025 0
+        rotation -4.1327187529378334e-08 0.9999999999999983 -4.129429067917418e-08 1.5700000000000016
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 1 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.025
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE wheel
+        physics DEF wheel_physics Physics {
+        }
+      }
+    }
+  ]
+  boundingObject USE Body
+  physics Physics {
+  }
+  controller "GTSAM_test"
+}
