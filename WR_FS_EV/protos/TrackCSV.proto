@@ -1,0 +1,43 @@
+#VRML_SIM R2022b utf8
+# tags: nonDeterministic
+# template language: javascript
+
+EXTERNPROTO "../protos/FsCone.proto"
+
+PROTO TrackCSV [
+  field SFVec3f      translation  0 0 0
+  field SFRotation   rotation     0 0 1 0
+  field SFString     name         "track cones"
+  field SFString     track_file   "small_track.csv"
+]
+{
+  %<
+    let name = fields.name.value;
+
+    let csv = wbfile.readTextFile(context.project_path+fields.track_file.value);
+    let cones = csv.split("\n");
+    let expression = '';
+    let car_start = [];
+
+    for( let i=1; i< cones.length; i+=1 ) {
+        let properties = cones[i].split(",");
+        let color = "";
+        if (properties[0] == "blue") color = "blue";
+        else if (properties[0] == "yellow") color = "yellow";
+        else if (properties[0] == "orange" || properties[0] == "big_orange") color = "orange";
+        else if (properties[0] == "car_start") {car_start = [properties[1], properties[2]]; continue;}
+        else continue;
+
+        expression += 'FsCone \n {\n name "' + name + i +'"\n rotation 1 0 0 1.5708' + "\n translation " + properties[1] + " " + properties[2] + " 0" + '\n color "' + properties[0] +'"\n}';
+    }
+
+  >%
+  Transform
+  {
+    translation %<= -car_start[0] >%  %<= -car_start[1] >% 0
+    rotation IS rotation
+    children [
+      %<= expression >%
+    ]
+  }
+}

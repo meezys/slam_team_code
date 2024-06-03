@@ -1,0 +1,125 @@
+#VRML_SIM R2022a utf8
+# tags: nonDeterministic
+# template language: javascript
+
+EXTERNPROTO "../protos/FsCone.proto"
+
+PROTO Fig8Cones [
+  field SFVec3f      translation  0 0 0
+  field SFRotation   rotation     0 0 1 0
+  field SFString     name         "fig8 cones"
+  field SFFloat      innerDiameter  15.25
+  field SFFloat      outerDiameter  21.25
+  field SFFloat      circCones   16
+  field SFFloat      circSep      18.25 # distance between the centers of the circles
+  field SFFloat      coneGap      3  
+  field SFFloat      coneSep      3   
+  field SFFloat      trackLength  30
+  field SFFloat      noise        0.05 # stddev of noise added to cone positions
+]
+{
+  %<
+    function randn( dist ) 
+    {
+      if( dist <= 0 ) return 0;
+      var u = 0, v = 0;
+      while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+      while(v === 0) v = Math.random();
+      return Math.sqrt( -dist * Math.log( u ) ) * Math.cos( dist * Math.PI * v );
+    }
+  
+    let inRad = fields.innerDiameter.value * 0.5;
+    let outRad = fields.outerDiameter.value * 0.5;
+    let circCones = fields.circCones.value;
+    let gap = fields.coneGap.value;
+    let sep = fields.coneSep.value;
+    let circSep = fields.circSep.value;
+    let len = fields.trackLength.value;
+    let name = fields.name.value;
+    let circle = 6.28318530718;
+    let noise = fields.noise.value;
+  >%
+  Transform
+  {
+    translation IS translation
+    rotation IS rotation
+    children
+    [
+      # entrance/exit
+      %< for( let x=-len*0.5; x<=len*0.5; x+=sep ) { >%
+        %< if( x >= inRad || x <= -inRad ) { >%
+            FsCone 
+            {
+              name "%<= name + x + 'b' >%"
+              rotation 1 0 0 1.5708
+              translation %<= x + randn(noise) >% %<= gap*0.5 + randn(noise) >% 0
+              %< if( x > 0 ) { >%
+                color "orange"
+              %< } else { >%
+                color "blue"
+              %< } >%
+            }
+            FsCone 
+            {
+              name "%<= name + x + 'y' >%"
+              rotation 1 0 0 1.5708
+              translation %<= x + randn(noise) >% %<= -gap*0.5 + randn(noise) >% 0
+              %< if( x > 0 ) { >%
+                color "orange"
+              %< } else { >%
+                color "yellow"
+              %< } >%
+            }
+        %< } >%
+      %< } >%
+
+      # left inner circle
+      %< for( let i=0; i<circle; i+=circle/circCones ) { >%
+        FsCone 
+        {
+          name "%<= name + i + 'ib' >%"
+          rotation 1 0 0 1.5708
+          translation %<= Math.cos(i)*inRad + randn(noise) >% %<= (Math.sin(i)*inRad)+(circSep*0.5) + randn(noise) >% 0
+          color "blue"
+        }
+      %< } >%
+      # left outer circle
+      %< for( let i=0; i<circle; i+=circle/circCones ) { >%
+        %< let y = (Math.sin(i)*outRad)+(circSep*0.5);
+          if( y >= gap * 0.5 ) { >%
+            FsCone 
+            {
+              name "%<= name + i + 'oy' >%"
+              rotation 1 0 0 1.5708
+              translation %<= Math.cos(i)*outRad + randn(noise) >% %<= y + randn(noise) >% 0
+              color "yellow"
+            }
+        %< } >%
+      %< } >%
+
+      # right inner circle
+      %< for( let i=0; i<circle; i+=circle/circCones ) { >%
+        FsCone 
+        {
+          name "%<= name + i + 'iy' >%"
+          rotation 1 0 0 1.5708
+          translation %<= Math.cos(i)*inRad + randn(noise) >% %<= (Math.sin(i)*inRad)-(circSep*0.5) + randn(noise) >% 0
+          color "yellow"
+        }
+      %< } >%
+      # right outer circle
+      %< for( let i=0; i<circle; i+=circle/circCones ) { >%
+        %< let y = (Math.sin(i)*outRad)-(circSep*0.5);
+          if( y <= -gap * 0.5 ) { >%
+            FsCone 
+            {
+              name "%<= name + i + 'ob' >%"
+              rotation 1 0 0 1.5708
+              translation %<= Math.cos(i)*outRad + randn(noise) >% %<= y + randn(noise) >% 0
+              color "blue"
+            }
+        %< } >%
+      %< } >%
+    ]
+  }
+}

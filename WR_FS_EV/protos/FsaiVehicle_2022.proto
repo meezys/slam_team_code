@@ -1,0 +1,201 @@
+#VRML_SIM R2022b utf8
+
+EXTERNPROTO "../protos/FsaiVehicleMesh.proto"
+EXTERNPROTO "../protos/FsaiWheel_2022.proto"
+EXTERNPROTO "../protos/Zedcam_2022.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/vehicles/protos/abstract/Car.proto"
+
+PROTO FsaiVehicle_2022 [
+  field SFVec3f    translation     0 0 0               # Is `Transform.translation`.
+  field SFRotation rotation        0 0 0 0            # Is `Transform.rotation`.
+  field SFString   name            "fsaivehicle"       # Is `Solid.name`.
+  field SFString   controller      ""                      # Is `Robot.controller`.
+  field MFString   controllerArgs  []                      # Is `Robot.controllerArgs`.
+  field SFBool     synchronization TRUE                    # Is `Robot.synchronization`.
+  field SFColor    color           0.0 0.675 0.984             # Is `Material.diffuseColor`.
+  field SFFloat    wheelbase 1.545
+  field MFNode     addons   []
+  
+  field SFBool     supervisor FALSE
+  field SFBool     bodyShell FALSE
+]
+{
+  Car 
+  {
+    supervisor IS supervisor
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    model "ADAS"
+    controller IS controller
+    controllerArgs IS controllerArgs
+    synchronization IS synchronization
+    trackFront                     1.255
+    trackRear                      1.255
+    wheelbase IS wheelbase
+    minSteeringAngle               -0.418879
+    maxSteeringAngle               0.418879
+    suspensionFrontSpringConstant  100000 #900 #100000
+    suspensionFrontDampingConstant 4000 #50 #4000
+    suspensionRearSpringConstant   100000
+    suspensionRearDampingConstant  4000
+    wheelsDampingConstant          5
+    physics                 Physics { density -1 
+                                      mass 300 }
+    #radarCrossSection       100
+    wheelFrontRight         IS wheelFrontRight#FsaiWheel_2022 { name "front right wheel"}
+    wheelFrontLeft          IS wheelFrontLeft#FsaiWheel_2022 { name "front left wheel"}
+    wheelRearRight          IS wheelRearRight#FsaiWheel_2022 { name "rear right wheel"}
+    wheelRearLeft           IS wheelRearLeft#FsaiWheel_2022 { name "rear left wheel"}
+    type                    "4x4"
+    engineType              "electric"
+    engineSound             ""
+    #brakeCoefficient        700
+    time0To100              5
+    #engineMaxTorque         1
+    engineMaxPower          34000
+    #engineMinRPM            1
+    #engineMaxRPM            250
+    #gearRatio               [1 1] #[-30 30]
+    #maxWheelVelocity         29.8
+      
+    extensionSlot 
+    [   
+      Group
+      {
+        children IS addons
+      }
+            
+      Accelerometer 
+      {
+        name "accelerometer"
+        xAxis TRUE
+        yAxis TRUE
+        zAxis TRUE
+      }
+      
+      InertialUnit 
+      {
+        name "inertial"
+        xAxis TRUE 
+        zAxis TRUE 
+        yAxis TRUE  
+      }
+      
+      LED {
+      translation 0.858 0 0.438
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            metalness 0
+            emissiveIntensity 5
+          }
+          geometry Cylinder {
+            bottom FALSE
+            height 0.02
+            radius 0.052
+            top FALSE
+            subdivision 24
+          }
+          castShadows FALSE
+        }
+      ]
+      name "upper led"
+      color [
+        1 0 0
+        0 1 0
+        0 0 1
+      ]
+    }
+    LED {
+      translation 0.858 0 0.418
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            metalness 0
+            emissiveIntensity 5
+          }
+          geometry Cylinder {
+            bottom FALSE
+            height 0.02
+            radius 0.052
+            top FALSE
+            subdivision 24
+          }
+          castShadows FALSE
+        }
+      ]
+      name "lower led"
+      color [
+        1 0 0
+        0 1 0
+        0 0 1
+      ]
+    }
+
+      # body
+      %{ if fields.bodyShell.value then }%
+      Transform 
+      {
+        translation 0.76 0.0 0
+        rotation 3.39051e-09 0.707105 0.707108 3.14159
+        children 
+        [
+          DEF FSAI_BODY Shape 
+          {
+            appearance PBRAppearance 
+            {
+              baseColor IS color
+              roughness 0.2
+              metalness 0
+            }
+            geometry FsaiVehicleMesh { }
+            castShadows FALSE
+          }
+        ]
+      }
+      %{ else }%
+      Transform 
+      {
+        translation 0.76 0.0 -0.02
+        rotation 3.39051e-09 0.707105 0.707108 3.14159
+        children 
+        [
+          DEF FSAI_BODY Shape 
+          {
+            appearance PBRAppearance 
+            {
+              baseColor IS color
+              roughness 0.2
+              metalness 0
+            }
+            geometry Box 
+            {
+              size 2.7 0.8 0.1
+            }
+            castShadows FALSE
+          }
+        ]
+      }
+      %{ end }%
+    ]
+    boundingObject Group 
+    {
+      children [
+        Transform {
+          translation 0.84 0.0 0.07
+          rotation 0 1 0 -1.5708
+          children [
+            Box {
+              size 0.6 0.44 2.830
+            }
+          ]
+        }
+      
+      ]
+    }
+
+  }
+}
