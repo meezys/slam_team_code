@@ -1,0 +1,73 @@
+#VRML_SIM R2022a utf8
+# tags: nonDeterministic
+# template language: javascript
+
+EXTERNPROTO "../protos/FsCone.proto"
+
+PROTO AccelCones [
+  field SFVec3f      translation  0 0 0
+  field SFRotation   rotation     0 0 1 0
+  field SFString     name         "accel cones"
+  field SFFloat      coneGap      3
+  field SFFloat      coneSep      5         
+  field SFFloat      trackLength  75
+  field SFFloat      noise        0.05 # stddev of noise added to cone positions
+]
+{
+  %<
+    function randn( dist ) 
+    {
+      if( dist <= 0 ) return 0;
+      var u = 0, v = 0;
+      while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+      while(v === 0) v = Math.random();
+      return Math.sqrt( -dist * Math.log( u ) ) * Math.cos( dist * Math.PI * v );
+    }
+  
+    let gap = fields.coneGap.value;
+    let sep = fields.coneSep.value;
+    let len = fields.trackLength.value;
+    let name = fields.name.value;
+    let noise = fields.noise.value;
+  >%
+  Transform
+  {
+    translation IS translation
+    rotation IS rotation
+    children
+    [
+      %< for( let i=0; i<len; i+=sep ) { >%
+        FsCone 
+        {
+          name "%<= name + i + 'b' >%"
+          rotation 1 0 0 1.5708
+          translation %<= i + randn(noise) >% %<= gap * 0.5 + randn(noise) >% 0
+          color "blue"
+        }
+      %< } >%
+      %< for( let i=0; i<len; i+=sep ) { >%
+        FsCone 
+        {
+          name "%<= name + i + 'y' >%"
+          rotation 1 0 0 1.5708
+          translation %<= i + randn(noise) >% %<= -gap * 0.5 + randn(noise) >% 0
+          color "yellow"
+        }
+      %< } >%
+      FsCone
+      {  
+        name "%<= name + 'l' >%"
+        rotation 1 0 0 1.5708
+        translation %<= len + randn(noise) >% %<= gap * 0.5 + randn(noise) >% 0
+        color "orange"
+      }
+      FsCone
+      {
+        name "%<= name + 'r' >%"
+        rotation 1 0 0 1.5708
+        translation %<= len + randn(noise) >% %<= -gap * 0.5 + randn(noise) >% 0
+        color "orange"
+      }
+    ]
+  }
+}

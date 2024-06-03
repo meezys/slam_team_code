@@ -1,0 +1,248 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "../protos/TrackCones.proto"
+EXTERNPROTO "../protos/FsaiVehicle_2022.proto"
+EXTERNPROTO "../protos/Zedcam_2022.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/appearances/protos/Asphalt.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/factory/containers/protos/CardboardBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+  info [
+    "Autonomous Vehicle Simulation"
+    "The simple controller example uses an on-board camera to follow the yellow road lines and a SICK sensor to avoid the obstacles."
+    "The control of the vehicle is done using the driver library."
+    "The vehicle based on the Car PROTO is modelled with realistic physics properties: motor torques, body mass, friction forces, suspensions, etc."
+  ]
+  title "City"
+  ERP 0.6
+  basicTimeStep 10
+  lineScale 1
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "CitroenCZeroWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "ToyotaPriusWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "LincolnMKZWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "RangeRoverSportSVRWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "TruckWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.09676716544543547 0.004325378224455912 -0.9952976473371528 3.116255946832316
+  position 26.493812106680977 -3.6816527240461827 1.1526396308507947
+  near 1
+  follow "fsaivehicle"
+  followType "Mounted Shot"
+  followSmoothness 0
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Fog {
+  color 0.38 0.35 0.32
+  visibilityRange 1000
+}
+DEF GROUND Solid {
+  children [
+    Shape {
+      appearance Asphalt {
+        textureTransform TextureTransform {
+          scale 50 50
+        }
+      }
+      geometry DEF GROUND_PLANE Plane {
+        size 200 200
+      }
+    }
+  ]
+  boundingObject USE GROUND_PLANE
+  locked TRUE
+}
+CardboardBox {
+  translation 36.9685 -36.1946 0.66
+  rotation 0 0 1 1.8326
+  size 0.5 0.5 1.5
+}
+DEF CAR FsaiVehicle_2022 {
+  translation 23.9698 -2.36854 0.246457
+  rotation -0.0004931978901983914 0.00044946589993452964 -0.9999997773680982 1.4835100000000003
+  controller "WR_controller"
+  addons [
+    Gyro {
+    }
+    InertialUnit {
+    }
+    Lidar {
+      translation 1.35676 -0.01 0.2937
+      rotation 0 1 0 0.27052597335995965
+      children [
+        DEF BOTTOM Solid {
+          translation 0 0 -0.0286
+          children [
+            Shape {
+              appearance DEF COLOR PBRAppearance {
+                baseColor 0.6 0.6 0.6
+                roughness 0.5
+              }
+              geometry Cylinder {
+                height 0.0188
+                radius 0.05165
+                subdivision 24
+              }
+            }
+          ]
+        }
+        DEF LOGO Solid {
+          translation 0 0 -0.0286
+          rotation 0 0 1 1.5708
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColorMap ImageTexture {
+                  url [
+                    "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/devices/velodyne/protos/textures/velodyne.png"
+                  ]
+                  repeatS FALSE
+                  repeatT FALSE
+                }
+                roughness 0.6
+                metalness 0
+                textureTransform TextureTransform {
+                  scale 4 1.5
+                  translation -0.38 -0.09
+                }
+              }
+              geometry Cylinder {
+                bottom FALSE
+                height 0.0188
+                radius 0.052
+                top FALSE
+                subdivision 24
+              }
+            }
+          ]
+          name "logo_solid"
+        }
+        DEF GLASS Solid {
+          translation 0 0.0004 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.0470588 0.0470588 0.0470588
+                roughness 0.1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.0392
+                radius 0.05165
+                subdivision 24
+              }
+            }
+          ]
+          name "glass_solid"
+        }
+        DEF TOP Solid {
+          translation 0 0 0.0274
+          children [
+            Shape {
+              appearance USE COLOR
+              geometry Cylinder {
+                height 0.0147
+                radius 0.05165
+                subdivision 24
+              }
+            }
+          ]
+          name "top_solid"
+        }
+      ]
+      name "xt32"
+      model "xt32"
+      boundingObject Cylinder {
+        height 0.0727
+        radius 0.052
+      }
+      physics Physics {
+        density -1
+        mass 0.83
+      }
+      horizontalResolution 2000
+      fieldOfView 6.28318
+      verticalFieldOfView 0.541052
+      numberOfLayers 32
+      minRange 0.05
+      maxRange 120
+      noise 0.003
+      minFrequency 5
+      maxFrequency 20
+    }
+    Zedcam_2022 {
+      translation 1.4 1.57946e-06 0.365
+      rotation 0 0 1 1.5708
+      cameraWidth 1280
+      cameraHeight 720
+      depth TRUE
+    }
+  ]
+  supervisor TRUE
+  bodyShell TRUE
+}
+DEF TRACK_CONES TrackCones {
+  translation 5.2897 0.39838 0
+  rotation 0 0 1 4.692820414042842e-06
+}
