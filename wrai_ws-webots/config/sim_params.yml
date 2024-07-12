@@ -1,0 +1,45 @@
+slam:
+  ros__parameters:
+    sync_slop: 0.05 # maximum time between pose and measurement messages (sec)
+
+    num_particles: 5
+
+    association_threshold: 2.0 # threshold where we say a measurement is of a certain landmark (m)
+    landmark_combination_threshold: 2.0 # threshold where we combine two landmarks (m)
+
+    motion_dist_noise: 0.001 # car pos noise (m)
+    motion_angle_noise: 0.0005 # car heading noise (rad)
+
+    obs_dist_noise: 0.003 # measurement dist noise (m)
+    obs_angle_noise: 0.0001745 # measurement angle noise (rad)
+
+yolo:
+  ros__parameters:
+    weights_path: yolov8n-cones-300-i16.engine # name of the model file
+
+    conf_thresh: 0.25 # threshold of confidence for a detection to be confirmed (0-1)
+    iou_thresh: 0.7
+    
+    visualize: true # whether to send images over ROS
+
+midpoints:
+  ros__parameters:
+    distance_between_cones: 7.0 # expected distance between opposing cones (m)
+
+# EUFS wheelbase: 1.58
+# ADS DV wheelbase: 1.532
+
+pure_pursuit:
+  ros__parameters:
+    path_smoothing: 0.95        # how much to smooth the path, higher is smoother (0 - 1)
+    path_spacing: 0.2           # the space inbetween injected points (m)
+    path_tolerance: 0.1         # how well to smooth the path, lower number is a higher quality path
+
+    lookahead_distance: 3.0     # pure pursuit lookahead distance (m)
+    
+    wheelbase: 1.53             # length of the vehicle wheelbase (m)
+
+    min_speed: 0.5              # minimum vehicle speed (ms^-1)
+    max_speed: 3.0              # maximum vehicle speed (ms^-1)
+    max_deceleration: 1.0       # maximum amount of braking (ms^-2)
+    max_centripetal_accel: 1.0  # maximum centripetal acceleration, this affects the velocity the vehicle will take corners at (ms^-2)

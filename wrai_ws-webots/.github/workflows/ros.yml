@@ -1,0 +1,20 @@
+name: ROS Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container: ros:humble-ros-base
+    steps:
+    - uses: actions/checkout@v3
+    - name: Colcon build
+      run: |
+        sudo apt-get update
+        sudo apt-get install python3-pip -y
+        rosdep update 
+        rosdep install --from-paths . --ignore-src -r -y
+        . /opt/ros/humble/setup.sh
+        colcon build
+    
+     

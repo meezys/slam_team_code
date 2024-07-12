@@ -1,0 +1,10 @@
+[submodule "vectornav"]
+	path = vectornav
+	url = https://github.com/dawonn/vectornav.git
+	branch = ros2
+[submodule "eufs_msgs"]
+	path = eufs_msgs
+	url = https://gitlab.com/eufs/eufs_msgs.git
+[submodule "wrai_webots"]
+	path = wrai_webots
+	url = https://github.com/Warwick-Racing/webots_fsai.git

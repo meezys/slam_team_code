@@ -1,0 +1,29 @@
+name: Sphinx Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container: ros:humble-ros-base
+        
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-pip 
+        pip3 install -r doc_requirements.txt
+        pip3 install numpy numba
+        rosdep update 
+        rosdep install --from-paths . --ignore-src -r -y --rosdistro=humble
+    - name: Build docs
+      working-directory: ./docs
+      run: |
+        . /opt/ros/humble/setup.sh
+        make html
+    - name: Archive docs build
+      uses: actions/upload-artifact@v3
+      with: 
+        name: sphinx-docs
+        path: docs/build/html

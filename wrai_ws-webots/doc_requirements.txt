@@ -1,0 +1,4 @@
+# Just the requirements for the docs to build
+# Does not include any dependencies of any packages
+Sphinx==5.3.0
+sphinx-rtd-theme==1.1.1
