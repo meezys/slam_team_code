@@ -1,42 +1,27 @@
-# WRAI Simultaneous Localisation and Mapping
+# FastSLAM
+Python simulation of FastSLAM
 
-A ROS package that turns relative cone measurements into absolute positions, and calculates the vehicle position fromn those measurements.
+## Intall Dependencies
+Using a new virtual env to install the packages:
+`pip install -r requirements.txt`
 
-### ROS 2 Subscriptions
+## Run Simulation
+1. Run FastSLAM 1.0
+`python fast_slam.py`
 
-| Topic Name        | Type                                                                                                              | Purpose                                           |
-| ----------        | ----                                                                                                              | -------                                           |
-| `/camera_cones`   | [wrai_msgs/ConeMeasurementArray](https://github.com/Warwick-Racing/WRAI1-Main/blob/-/wrai_msgs/msg/ConeMeasurementArray.msg) | Cone measurements from the camera                 |
-| `/odom`           | [nav_msgs/Odometry](http://docs.ros.org/en/noetic/api/nav_msgs/html/msg/Odometry.html)                            | The current position and orientation of the car   |
+2. Run FastSLAM 2.0
 
-### ROS 2 Publishers
+## Control
+Using arrow keys to control the robot, you can set number of steps in `fast_slam.py`.
 
-| Topic Name | Type                                                                                                     | Purpose                             |
-| ---------- | ----                                                                                                     | -------                             |
-|`/cones`    | [wrai_msgs/ConeArray](https://github.com/Warwick-Racing/WRAI1-Main/blob/-/wrai_msgs/msg/ConeArray.msg)   | An array of the current known cones |
+## Sensor
+Currently, there are 4 landmarks in the world. You can add more landmarks in the `world.py` by modifying `setup_world` method. The coordinates are using the bottom-left corner point as the origin.
 
-### ROS 2 Services 
+In the `sense` method in the `particle.py`, the robot randomly observe 2 landmarks and measure the distance and the direction to the landmarks. Then it adds the Gaussian noise to the measurements. The noise level is set up in the `set_noise` method. Only robot has the `bearing_noise`:measurement errors for the angles, and `distance_noise`: measurement errors for the distance. You can also set the motion noise for the robot and particles.
 
-| Service Name | Type | Purpose |
-| ------------ | ---- | ------- |
-| N/A | N/A | N/A |
+The `obs_noise` is the additive part of the prediction step of the EKF. First term specifies the error for distance and the second term specify the error for angles. Larger the value, more relax the model will be when considering the data association. `obs_noise` should be at the same magnitude as `distance_noise` and `bearing_noise`.
 
-### Parameters
+The `control_noise` attribute model the motion noise. First two terms specify the error for the x, y coordinates and the third term for the orientation.
 
-NB: if a parameter has no default value, a value must be provided.
-
-| Name                              | Type     | Default         | Purpose |
-| -----                             | ----     | -------         | ------- |
-| `start_state`                     | float[]  | [0.0, 0.0, 0.0] | Where the car starts  |
-| `num_particles`                   | int      | 20              | The number of particles in the particle filter  |
-| `slop`                            | float    | 0.01            | The slop of the time synchronizer  |
-| `type_thresh`                     | float    | 0.75            | The minimum probability threshold for a cone type to be confirmed   |
-| `association_threshold`           | float    | 0.75            | If an observation is within this distance to a landmark, they are associated. |
-| `landmark_combination_threshold`  | float    | 0.50            | if two landmarks are within this distance of eachother, they are combined   |
-| `obs_distance_thresh`             | float    | 15.0            | The furthest that we can observe cones from.   |
-| `obs_angle_thresh`                | float    | pi/3            | Maximum FOV /2.    |
-| `type_obs_prob`                   | float    | 0.75            | Probability of a cone type (colour) observation to be true.   |
-| `motion_dist_noise`               | float    | 0.10            | Noise of the measurement of distance travelled.    |
-| `motion_angle_noise`              | float    | 0.01            | Noise of the measurement of angle turned.   |
-| `obs_dist_noise`                  | float    | 0.10            | Noise of landmark(cone) range observations.   |
-| `obs_angle_noise`                 | float    | 0.0025          | Noise of landmark(cone) angle observations.   |
+## Souce
+[fastSLAM paper](https://www.ri.cmu.edu/pub_files/pub4/montemerlo_michael_2003_1/montemerlo_michael_2003_1.pdf)
